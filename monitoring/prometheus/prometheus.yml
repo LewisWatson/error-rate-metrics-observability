@@ -1,0 +1,26 @@
+global:
+  scrape_interval:   15s # By default, scrape targets every 15 seconds.
+
+# Rule files specifies a list of globs. Rules and alerts are read from
+# all matching files.
+rule_files:
+  - /etc/prometheus/alerts.yml
+
+scrape_configs:
+- job_name: 'error-rate-demo'
+
+  # Override the global default and scrape targets from this job every 10 seconds.
+  scrape_interval: 2s
+  metrics_path: '/actuator/prometheus'
+
+  static_configs:
+  - targets: ['error-rate-demo:8080']
+    labels:
+      service: 'error-rate-demo'
+
+- job_name: 'prometheus'
+
+  scrape_interval: 5s
+
+  static_configs:
+  - targets: ['localhost:9090']

@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "9497215a-4d85-435c-b18d-802f8a951551",
+		"name": "Error Rate Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "run simulation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"iterations\": 1000,\n    // \"happyPathOdds\": 1,\n    // \"validationErrorOdds\": 0.2,\n    // \"slowCatRepoUpdateOdds\": 0.1,\n    // \"callToXServiceFailedOdds\": 0.09,\n    // \"callToXServiceFailedPersistentlyOdds\": 0.01\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/simulate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"simulate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

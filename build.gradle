@@ -1,0 +1,48 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'com.appmattus.markdown' version '0.6.0'
+}
+
+group = 'to.bridge.demo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.apache.commons:commons-math3:3.5'
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+tasks.named("check") {
+	dependsOn(tasks.named("markdownlint"))
+}
+
+import com.appmattus.markdown.rules.LineLengthRule
+
+markdownlint.with {
+	// Optional - Use to override settings for individual rules or add in custom rules
+	rules { rb ->
+		rb.unaryPlus(new LineLengthRule(120, true, true, true, ".,;:!?) ", {rsb -> }))
+	}
+}

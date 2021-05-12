@@ -1,0 +1,12 @@
+groups:
+  - name: example
+    rules:
+
+      - alert: ErrorRate
+        expr: sum(rate(error_total{persistent="n"}[1m])) by(service, cause) > 1
+        for: 5s
+        labels:
+          severity: page
+        annotations:
+          summary: "Service {{ $labels.service }} has a high error rate"
+          description: "{{ $labels.service }} has had more than 1 instance per minute of {{ $labels.cause }} in the last 5 seconds."
