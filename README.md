@@ -41,8 +41,22 @@ URLs:
   - Password: `password`
   - See the pre-configured [Error Rate Demo dashboard](monitoring/grafana/provisioning/dashboards/error-rate-demo.dashboard.json)
 
-There is a postman collection that you can use to run simulations available in
-the [src/test/postman](src/test/postman) directory.
+You can then run a simulation via a HTTP POST request
+
+```bash
+curl --location --request POST 'http://localhost:8080/simulate' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "iterations": 1000,
+    "happyPathOdds": 1,
+    "validationErrorOdds": 0.2,
+    "slowCatRepoUpdateOdds": 0.1,
+    "callToXServiceFailedOdds": 0.09,
+    "callToXServiceFailedPersistentlyOdds": 0.01
+}'
+```
+
+If you prefer to use postman there is a collection in the [src/test/postman](src/test/postman) directory.
 
 ## Example output after a simulation is run
 
