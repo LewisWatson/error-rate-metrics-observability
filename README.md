@@ -4,7 +4,6 @@ Proof of concept demo for metric observability and alerting on errors in a
 [Spring Boot](https://spring.io/projects/spring-boot) service using
 [Prometheus](https://prometheus.io), and [Grafana](https://grafana.com/).
 
-
 ## Requirements
 
 - [JDK 11](https://docs.oracle.com/en/java/javase/11/)
@@ -58,7 +57,7 @@ curl --location --request POST 'http://localhost:8080/simulate' \
 
 If you prefer to use postman there is a collection in the [src/test/postman](src/test/postman) directory.
 
-## Example output after a simulation is run
+## Example output after a simulation run
 
 ### Error Rate Demo prometheus endpoint
 

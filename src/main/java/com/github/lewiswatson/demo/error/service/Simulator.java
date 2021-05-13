@@ -20,10 +20,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class Simulator {
 
-  private final Counter validationErrorCounter;
-  private final Counter slowCatRepoUpdateCounter;
-  private final Counter callToXServiceFailedCounter;
-  private final Counter callToXServiceFailedPersistentlyCounter;
+  private final ErrorCounter errorCounter;
 
   public SimulationResponse simulate(int iterations, List<Pair<Error, Double>> odds) {
 
@@ -43,19 +40,19 @@ public class Simulator {
           break;
         case VALIDATION_ERROR:
           log.debug("{} is not a valid PAN number", "foo");
-          validationErrorCounter.increment();
+          errorCounter.increment("validation-error");
           break;
         case SLOW_CAT_REPO_UPDATE:
           log.info("slow cat repository update operation (to update {} breed): {}ms", "tabby cat", "612");
-          slowCatRepoUpdateCounter.increment();
+          errorCounter.increment("slow-cat-repo-update");
           break;
         case CALL_TO_X_SERVICE_FAILED:
           log.info("call to {} service failed, doing {} as a result", "x", "y", new IOException("due to z"));
-          callToXServiceFailedCounter.increment();
+          errorCounter.increment("call to service x failed");
           break;
         case CALL_TO_X_SERVICE_FAILED_PERSISTENTLY:
           log.warn("call to {} service failing persistently after {} attempts", "x", "5");
-          callToXServiceFailedPersistentlyCounter.increment();
+          errorCounter.incrementPersistentError("call to service x failing persistently");
           break;
       }
 
