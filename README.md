@@ -32,7 +32,7 @@ docker compose up
 After all services have started successfully, you can navigate to the following
 URLs:
 
-- [outcome-rate-demo Spring Boot service Prometheus endpoint](http://localhost:8080/actuator/prometheus)
+- [error-rate-demo Spring Boot service Prometheus endpoint](http://localhost:8080/actuator/prometheus)
 - [Prometheus](http://localhost:9090/)
   - See the [pre-configured alerts](monitoring/prometheus/alerts.yml)
 - [Grafana](http://localhost:3000/)
