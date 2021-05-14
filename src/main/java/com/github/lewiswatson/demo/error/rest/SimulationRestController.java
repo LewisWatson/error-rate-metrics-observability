@@ -1,6 +1,6 @@
 package com.github.lewiswatson.demo.error.rest;
 
-import com.github.lewiswatson.demo.error.model.Error;
+import com.github.lewiswatson.demo.error.model.Outcome;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +25,13 @@ public class SimulationRestController {
   @PostMapping(value = "simulate", produces = "application/json")
   public ResponseEntity<SimulationResponse> createPayment(@RequestBody SimulationParams simulationParams) {
 
-    List<Pair<Error, Double>> odds = new ArrayList<>();
-    odds.add(new Pair<>(Error.HAPPY_PATH, simulationParams.getHappyPathOdds()));
-    odds.add(new Pair<>(Error.VALIDATION_ERROR, simulationParams.getValidationErrorOdds()));
-    odds.add(new Pair<>(Error.SLOW_CAT_REPO_UPDATE, simulationParams.getSlowCatRepoUpdateOdds()));
-    odds.add(new Pair<>(Error.CALL_TO_X_SERVICE_FAILED, simulationParams.getCallToXServiceFailedOdds()));
-    odds.add(new Pair<>(Error.CALL_TO_X_SERVICE_FAILED_PERSISTENTLY, simulationParams.getCallToXServiceFailedPersistentlyOdds()));
+    List<Pair<Outcome, Double>> odds = new ArrayList<>();
+    odds.add(new Pair<>(Outcome.HAPPY_PATH, simulationParams.getHappyPathOdds()));
+    odds.add(new Pair<>(Outcome.HAPPY_PATH_2, simulationParams.getHappyPath2Odds()));
+    odds.add(new Pair<>(Outcome.VALIDATION_ERROR, simulationParams.getValidationErrorOdds()));
+    odds.add(new Pair<>(Outcome.SLOW_CAT_REPO_UPDATE, simulationParams.getSlowCatRepoUpdateOdds()));
+    odds.add(new Pair<>(Outcome.CALL_TO_X_SERVICE_FAILED, simulationParams.getCallToXServiceFailedOdds()));
+    odds.add(new Pair<>(Outcome.CALL_TO_X_SERVICE_FAILED_PERSISTENTLY, simulationParams.getCallToXServiceFailedPersistentlyOdds()));
 
     SimulationResponse simulationResponse = simulator.simulate(simulationParams.getIterations(), odds);
 

@@ -1,6 +1,6 @@
 package com.github.lewiswatson.demo.error.rest.model;
 
-import com.github.lewiswatson.demo.error.model.Error;
+import com.github.lewiswatson.demo.error.model.Outcome;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Singular;
@@ -11,5 +11,5 @@ import lombok.Value;
 public class SimulationResponse {
   Integer iterations;
   @Singular
-  Map<Error, Integer> counts;
+  Map<Outcome, Integer> counts;
 }

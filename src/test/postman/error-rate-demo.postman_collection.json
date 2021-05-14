@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "9497215a-4d85-435c-b18d-802f8a951551",
-		"name": "Error Rate Demo",
+		"name": "Error rate demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"iterations\": 1000,\n    // \"happyPathOdds\": 1,\n    // \"validationErrorOdds\": 0.2,\n    // \"slowCatRepoUpdateOdds\": 0.1,\n    // \"callToXServiceFailedOdds\": 0.09,\n    // \"callToXServiceFailedPersistentlyOdds\": 0.01\n}",
+					"raw": "{\n    \"iterations\": 10000,\n    \"happyPathOdds\": 1,\n    \"happyPath2Odds\": 1,\n    \"validationErrorOdds\": 1,\n    \"slowCatRepoUpdateOdds\": 0.1,\n    \"callToXServiceFailedOdds\": 0.09,\n    \"callToXServiceFailedPersistentlyOdds\": 0.01\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -26,8 +26,8 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8080/simulate",
-					"protocol": "https",
+					"raw": "http://localhost:8080/simulate",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -37,7 +37,68 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "run simulation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"iterations\": 1000,\n    \"happyPathOdds\": 1,\n    \"validationErrorOdds\": 0.2,\n    \"slowCatRepoUpdateOdds\": 0.1,\n    \"callToXServiceFailedOdds\": 0.09,\n    \"callToXServiceFailedPersistentlyOdds\": 0.01\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/simulate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"simulate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 12 May 2021 14:26:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"iterations\": 1000,\n    \"counts\": {\n        \"HAPPY_PATH\": 698,\n        \"CALL_TO_X_SERVICE_FAILED_PERSISTENTLY\": 9,\n        \"SLOW_CAT_REPO_UPDATE\": 73,\n        \"VALIDATION_ERROR\": 153,\n        \"CALL_TO_X_SERVICE_FAILED\": 67\n    }\n}"
+				}
+			]
 		}
 	]
 }

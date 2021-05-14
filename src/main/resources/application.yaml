@@ -1,9 +1,6 @@
 ---
-behaviour-metrics:
-  counter-name: behaviour
-  validation-error-tag: validation-error
 management.endpoints.web.exposure.include:
   - health
   - info
   - prometheus
-logging.level.to.bridge.demo.aggregatedbehaviourmetrics.service: debug
+logging.level.com.github.lewiswatson.demo.error: debug

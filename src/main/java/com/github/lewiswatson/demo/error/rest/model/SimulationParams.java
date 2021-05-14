@@ -6,6 +6,6 @@ import lombok.Value;
 @Value @AllArgsConstructor
 public class SimulationParams {
   Integer iterations;
-  Double happyPathOdds;
-  Double validationErrorOdds, slowCatRepoUpdateOdds, callToXServiceFailedOdds, callToXServiceFailedPersistentlyOdds;
+  Double happyPathOdds, happyPath2Odds, validationErrorOdds, slowCatRepoUpdateOdds, callToXServiceFailedOdds,
+      callToXServiceFailedPersistentlyOdds;
 }

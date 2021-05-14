@@ -1,4 +1,19 @@
 {
+  "__inputs": [],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "5.4.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": "5.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -15,7 +30,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -25,9 +40,101 @@
       "dashes": false,
       "fill": 1,
       "gridPos": {
-        "h": 12,
+        "h": 24,
         "w": 12,
         "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": false,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(failure_total{service=\"error-rate-demo\", persistent=\"n\"}[1m])) by(category)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "failure: {{category}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(success_total{service=\"error-rate-demo\"}[1m])) by(category)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "success: {{category}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Outcomes",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 12,
+        "w": 12,
+        "x": 12,
         "y": 0
       },
       "id": 2,
@@ -55,10 +162,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(error_total{service=\"error-rate-demo\", persistent=\"n\"}[1m])) by(cause)",
+          "expr": "sum(rate(failure_total{service=\"error-rate-demo\", persistent=\"n\"}[1m])) by(category)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{cause}}",
+          "legendFormat": "{{category}}",
           "refId": "A"
         }
       ],
@@ -113,7 +220,7 @@
         "h": 12,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 12
       },
       "id": 4,
       "legend": {
@@ -140,10 +247,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(error_total{service=\"error-rate-demo\", persistent=\"y\"}[1m])) by(cause)",
+          "expr": "sum(rate(failure_total{service=\"error-rate-demo\", persistent=\"y\"}[1m])) by(category)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{cause}}",
+          "legendFormat": "{{category}}",
           "refId": "A"
         }
       ],
