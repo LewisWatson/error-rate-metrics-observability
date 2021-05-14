@@ -9,7 +9,7 @@ rule_files:
 scrape_configs:
 - job_name: 'error-rate-demo'
 
-  # Override the global default and scrape targets from this job every 10 seconds.
+  # Override the global default for demo purposes
   scrape_interval: 2s
   metrics_path: '/actuator/prometheus'
 
@@ -20,7 +20,8 @@ scrape_configs:
 
 - job_name: 'prometheus'
 
-  scrape_interval: 5s
+  # Override the global default for demo purposes
+  scrape_interval: 2s
 
   static_configs:
   - targets: ['localhost:9090']

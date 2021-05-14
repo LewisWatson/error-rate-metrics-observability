@@ -13,25 +13,23 @@ import org.apache.commons.math3.distribution.EnumeratedDistribution;
 import org.apache.commons.math3.util.Pair;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class Simulator {
 
-  private final MicrometerOutcomeCounter outcomeCounter;
+  private final OutcomeCounter outcomeCounter;
 
   public SimulationResponse simulate(int iterations, List<Pair<Outcome, Double>> odds) {
 
-    // initialise behaviour count map for SimulationResponse
-    Map<Outcome, Integer> errorCounts = new HashMap<>();
-    Arrays.asList(Outcome.values()).stream().forEach(outcome -> errorCounts.put(outcome, 0));
+    Map<Outcome, Integer> outcomeCounts = new HashMap<>();
+    Arrays.asList(Outcome.values()).stream().forEach(outcome -> outcomeCounts.put(outcome, 0));
 
-    EnumeratedDistribution<Outcome> behaviourEnumeratedDistribution = new EnumeratedDistribution<>(odds);
+    EnumeratedDistribution<Outcome> outcomeEnumeratedDistribution = new EnumeratedDistribution<>(odds);
 
     for(int i=0; i<iterations; i++) {
 
-      Outcome outcome = behaviourEnumeratedDistribution.sample();
+      Outcome outcome = outcomeEnumeratedDistribution.sample();
 
       switch (outcome) {
         case HAPPY_PATH:
@@ -60,9 +58,9 @@ public class Simulator {
           break;
       }
 
-      errorCounts.put(outcome, errorCounts.get(outcome) + 1);
+      outcomeCounts.put(outcome, outcomeCounts.get(outcome) + 1);
     }
 
-    return SimulationResponse.builder().iterations(iterations).counts(errorCounts).build();
+    return SimulationResponse.builder().iterations(iterations).counts(outcomeCounts).build();
   }
 }

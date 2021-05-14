@@ -9,4 +9,4 @@ groups:
           severity: page
         annotations:
           summary: "Service {{ $labels.service }} has a high failure rate"
-          description: "{{ $labels.service }} has had more than 1 {{ $labels.category }} failure per minute of in the last 5 seconds."
+          description: "{{ $labels.service }} has had more than 1 {{ $labels.category }} failure per minute in the last 5 seconds."

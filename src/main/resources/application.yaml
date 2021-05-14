@@ -3,4 +3,4 @@ management.endpoints.web.exposure.include:
   - health
   - info
   - prometheus
-logging.level.com.github.lewiswatson.demo.error: debug
+logging.level.com.github.lewiswatson: debug
